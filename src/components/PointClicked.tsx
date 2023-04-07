@@ -2,7 +2,8 @@ export const PointyClicky: React.FC<{
   marginL: number;
   marginT: number;
   pinpointRadius: number;
-}> = ({ marginL, marginT, pinpointRadius }) => {
+  style?: { [key: string]: unknown };
+}> = ({ marginL, marginT, pinpointRadius, style }) => {
   return (
     <div
       style={{
@@ -13,6 +14,7 @@ export const PointyClicky: React.FC<{
         marginTop: `${marginT - pinpointRadius}px`,
         zIndex: "3",
         position: "absolute",
+        ...style,
       }}
     />
   );

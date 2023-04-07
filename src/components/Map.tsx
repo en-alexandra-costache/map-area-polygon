@@ -24,19 +24,23 @@ export const Map: React.FC = () => {
     point: { x: number; y: number },
     polygon: { x: number; y: number }[]
   ) => {
+    let isIn = false;
     for (var i = 0; i < polygon.length - 1; ++i) {
       const coord0 = polygon[i],
         coord1 = polygon[i + 1];
-
       if (
-        point.y < coord0.y != point.y < coord1.y &&
+        point.y < coord0.y !== point.y < coord1.y &&
         point.x <
           ((coord1.x - coord0.x) * (point.y - coord0.y)) /
             (coord1.y - coord0.y) +
             coord0.x
       ) {
-        return point;
+        isIn = !isIn;
       }
+    }
+
+    if (isIn) {
+      return point;
     }
   };
 
@@ -85,6 +89,12 @@ export const Map: React.FC = () => {
         marginL={findThePoint.x}
         marginT={findThePoint.y}
         pinpointRadius={10}
+        style={{
+          backgroundColor:
+            checkIfPointInsidePolygon(findThePoint, coords) && isPolygonDrawn
+              ? "blue"
+              : "rgba(0, 255, 85, 0.2)",
+        }}
       />
       {pointsOnMap}
       {isPolygonDrawn && (
