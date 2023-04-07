@@ -6,7 +6,10 @@ export const Map: React.FC = () => {
   const [coords, setCoords] = useState<{ x: number; y: number }[]>([]);
   const [isPolygonDrawn, setIsPolygonDrawn] = useState<boolean>(false);
   const [pointsOnMap, setPointsOnMap] = useState<React.ReactNode[]>([]);
-  const findThePoint = { x: 300, y: 250 };
+  const findThePoint = [
+    { x: 300, y: 250 },
+    { x: 400, y: 50 },
+  ];
 
   const isAInRangeOfB = (
     a: { x: number; y: number },
@@ -65,7 +68,6 @@ export const Map: React.FC = () => {
       setCoords((prev) => [...prev, firstCoords]);
       setIsPolygonDrawn(true);
       setPointsOnMap([]);
-      console.log(checkIfPointInsidePolygon(findThePoint, coords));
     }
 
     if (isPolygonDrawn) {
@@ -85,17 +87,19 @@ export const Map: React.FC = () => {
         zIndex: "1",
       }}
     >
-      <PointyClicky
-        marginL={findThePoint.x}
-        marginT={findThePoint.y}
-        pinpointRadius={10}
-        style={{
-          backgroundColor:
-            checkIfPointInsidePolygon(findThePoint, coords) && isPolygonDrawn
-              ? "blue"
-              : "rgba(0, 255, 85, 0.2)",
-        }}
-      />
+      {findThePoint.map((points) => (
+        <PointyClicky
+          marginL={points.x}
+          marginT={points.y}
+          pinpointRadius={10}
+          style={{
+            backgroundColor:
+              checkIfPointInsidePolygon(points, coords) && isPolygonDrawn
+                ? "blue"
+                : "rgba(0, 255, 85, 0.2)",
+          }}
+        />
+      ))}
       {pointsOnMap}
       {isPolygonDrawn && (
         <AreaZonePolygonSelection
