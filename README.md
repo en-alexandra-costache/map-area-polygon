@@ -44,3 +44,9 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+## *FAQ*
+
+### How do I draw on the map?
+
+In order to draw you need to click on the map to set the points of the polygon. To close the polygon, place the closing point where you placed the first one.
